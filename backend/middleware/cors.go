@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -9,11 +8,10 @@ import (
 )
 
 func InitCORS(r *gin.Engine) {
-	PORT := os.Getenv("ALLOWED_PORT")
-	HOST := fmt.Sprintf("http://localhost:%s", PORT)
+	FRONTEND_URL := os.Getenv("FRONTEND_URL")
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{HOST},
+		AllowOrigins:     []string{FRONTEND_URL},
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length", "Accept-Encoding", "Authorization", "X-CSRF-Token"},
 		AllowCredentials: true,

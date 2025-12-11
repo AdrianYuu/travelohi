@@ -1,18 +1,21 @@
 package controllers
 
 import (
+	"os"
+	"strconv"
+
 	"github.com/AdrianYuu/TraveloHI_TPA_Web_AY/models"
 	"gopkg.in/gomail.v2"
 )
 
-const HOST = "smtp.gmail.com"
-const PORT = 587
-const EMAIL = "travelohi.website@gmail.com"
-const PASSWORD = "elji tgmc ljmp ozvh"
+var HOST = os.Getenv("SMTP_HOST")
+var PORT, _ = strconv.Atoi(os.Getenv("SMTP_PORT"))
+var EMAIL = os.Getenv("SMTP_EMAIL")
+var PASSWORD = os.Getenv("SMTP_PASSWORD")
 
 func SendWelcomeEmail(emailReceiver string) {
 	m := gomail.NewMessage()
-	m.SetHeader("From", "travelohi.website@gmail.com")
+	m.SetHeader("From", os.Getenv("SMTP_EMAIL"))
 	m.SetHeader("To", emailReceiver)
 	m.SetHeader("Subject", "Welcome to TraveloHI")
 	m.SetBody("text/html", "Thank you for registering to TraveloHI. Hope you have a good day!")
@@ -23,7 +26,7 @@ func SendWelcomeEmail(emailReceiver string) {
 
 func SendOTPEmail(emailReceiver string, OTPCode string){
 	m := gomail.NewMessage()
-	m.SetHeader("From", "travelohi.website@gmail.com")
+	m.SetHeader("From", os.Getenv("SMTP_EMAIL"))
 	m.SetHeader("To", emailReceiver)
 	m.SetHeader("Subject", "TraveloHI OTP Code")
 	m.SetBody("text/html", "This is your OTP Code " + OTPCode + ". Please use it wisely!")
@@ -34,7 +37,7 @@ func SendOTPEmail(emailReceiver string, OTPCode string){
 
 func SendPaymentEmail(emailReceiver string, message string){
 	m := gomail.NewMessage()
-	m.SetHeader("From", "travelohi.website@gmail.com")
+	m.SetHeader("From", os.Getenv("SMTP_EMAIL"))
 	m.SetHeader("To", emailReceiver)
 	m.SetHeader("Subject", "TraveloHI Payment Information")
 	m.SetBody("text/html", message)
@@ -49,7 +52,7 @@ func SendBroadcastEmail(broadcast models.Broadcast){
 	d := gomail.NewDialer(HOST, PORT, EMAIL, PASSWORD)
 
 	for _, email := range emails {
-		m.SetHeader("From", "travelohi.website@gmail.com")
+		m.SetHeader("From", os.Getenv("SMTP_EMAIL"))
 		m.SetHeader("To", email)
 		m.SetHeader("Subject", broadcast.Title)
 		m.SetBody("text/html", broadcast.Message)

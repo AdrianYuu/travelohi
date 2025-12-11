@@ -7,12 +7,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCHbiIF_qOjboBiTD0PZ9QILCczbe2oVOk",
-  authDomain: "travelohi-89d78.firebaseapp.com",
-  projectId: "travelohi-89d78",
-  storageBucket: "travelohi-89d78.appspot.com",
-  messagingSenderId: "21026430903",
-  appId: "1:21026430903:web:4fc8ad1a2917edfbb65232",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/AdrianYuu/TraveloHI_TPA_Web_AY/config"
+	"github.com/AdrianYuu/TraveloHI_TPA_Web_AY/database"
 	_ "github.com/AdrianYuu/TraveloHI_TPA_Web_AY/docs"
 	"github.com/AdrianYuu/TraveloHI_TPA_Web_AY/initializers"
 	"github.com/AdrianYuu/TraveloHI_TPA_Web_AY/middleware"
@@ -15,8 +16,8 @@ func init(){
 
 func main() {
 	config.Connect()
-	// database.Migrate()
-	// database.Seed()
+	database.Migrate()
+	database.Seed()
 
 	r := gin.Default()
 	middleware.InitCORS(r)
